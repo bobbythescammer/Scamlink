@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #fff0f5; 
+            font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .cat-container img {
+            width: 200px;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 5px;
+        }
+
+        .warning-text {
+            color: #d63384;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-wrapper {
+            position: relative;
+            width: 450px;
+            height: 100px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        #yesBtn {
+            background-color: #ff69b4;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+            z-index: 1000;
+        }
+
+        #noBtn {
+            background-color: #ffffff;
+            color: #d63384;
+            border: 2px solid #ff69b4;
+            position: relative;
+        }
+
+        #message {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #message h1 {
+            font-size: 2.8rem;
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        /* Container for the kissing sticker to help it load */
+        .kiss-container {
+            width: 250px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .kiss-sticker {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="vibeMusic" loop>
+        <source src="https://www.chosic.com/wp-content/uploads/2021/04/And-So-It-Begins-Inspired-By-Crush-Music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="game-container">
+        <div class="cat-container">
+            <img src="https://media.giphy.com/media/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Asking Cat">
+            <p class="warning-text">Don't you dare press no! 😤</p>
+        </div>
+
+        <h1>Will u be my valentine?</h1>
+        
+        <div class="btn-wrapper">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <div id="message">
+        <h1>Yay! I knew u would say yes! ❤️</h1>
+        <div class="kiss-container">
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUybnN4ZGxscnpwNDkxcm8yaWpwMXA3Y3Z2c204d3ppZ3libXcydmZoaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/W1hd3uXRIbddu/giphy.gif" alt="Kissing Cat" class="kiss-sticker">
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const gameContainer = document.getElementById('game-container');
+        const message = document.getElementById('message');
+        const audio = document.getElementById('vibeMusic');
+
+        function moveNoButton() {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        yesBtn.addEventListener('click', () => {
+            audio.play().catch(e => console.log("Audio play failed"));
+            gameContainer.style.display = 'none';
+            message.style.display = 'flex';
+        });
+    </script>
+</body>
+</html>
